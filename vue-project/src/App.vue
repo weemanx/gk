@@ -1,6 +1,83 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+import HomeView from './components/HomeView.vue'
+import AboutView from './components/AboutView.vue'
+
+// 'home' = Főoldal (szöveg), 'about' = Részletek (táblázat)
+const aktualisLap = ref('home')
+
+// Egy egyszerű függvény, amivel a komponensek jelezni tudják a lapváltást
+const navigacio = (lapNev) => {
+  aktualisLap.value = lapNev
+}
+</script>
+
+<template>
+  <div id="app-container">
+    <main>
+      <!-- Megjelenítjük a megfelelő komponenst és átadjuk neki a váltás képességét -->
+      <HomeView v-if="aktualisLap === 'home'" @valt="navigacio" />
+      <AboutView v-else @valt="navigacio" />
+    </main>
+  </div>
+</template>
+
+<style>
+/* A megadott CSS stílusok globális alkalmazása */
+body {
+  background-color: LightSkyBlue;
+  color: darkblue;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+#app-container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+a {
+  color: firebrick;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:hover {
+  color: darkred;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script setup>
+import { ref } from 'vue'
+
+// 'home' = Kezdőlap, 'abc' = a betűzés
+const aktualisLap = ref('home')
 </script>
 
 <template>
@@ -45,3 +122,4 @@ header {
   }
 }
 </style>
+ -->
